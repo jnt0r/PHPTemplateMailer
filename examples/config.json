@@ -1,0 +1,8 @@
+{
+  "smtp_host": "[YOUR_SMTP_HOST]",
+  "smtp_user": "[YOUR_EMAIL]",
+  "smtp_password": "[YOUR_MAIL_PASSWORD]",
+  "smtp_secure": "tls",
+  "smtp_port": [SMTP_PORT],
+  "templates_dir": "templates"
+}
