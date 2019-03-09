@@ -5,20 +5,33 @@
  * Time: 16:08
  */
 
+use jnt0r\mailer\Address;
+use jnt0r\mailer\exception\InvalidEmailException;
+use jnt0r\mailer\Mail;
+use jnt0r\mailer\Mailer;
+use PHPMailer\PHPMailer\Exception;
 use PHPUnit\Framework\TestCase;
 
 class IntegrationTest extends TestCase
 {
     /**
      * UnitTest test method
-     * @throws \jnt0r\mailer\exception\InvalidEmailException
-     * @throws \PHPMailer\PHPMailer\Exception
-     * @throws \PHLAK\Config\Exceptions\InvalidContextException
+     * @throws Twig_Error_Loader
+     * @throws Twig_Error_Runtime
+     * @throws Twig_Error_Syntax
+     * @throws Exception
+     * @throws InvalidEmailException
      */
     public function testSendMail()
     {
-        $mailer = new \jnt0r\mailer\Mailer(__DIR__ . '/../../mailer_config.json');
+        $mailer = new Mailer(__DIR__ . '/../../mailer_config.json');
 
-        $mailer->send(new \jnt0r\mailer\Mail('Testing Emails', new \jnt0r\mailer\Address('test@jnt0r.com', 'Jonathan'), new \jnt0r\mailer\Address('jonathan.pollert@gmx.net', 'Jonathan Pollert'), 'Hallo, das ist eine Email!', 'Das ist der alt Content!'));
+        $mailer->send(new Mail(
+            'Testing Emails',
+            new Address('test@jnt0r.com', 'Jonathan'),
+            new Address('jonathan.pollert@gmx.net', 'Jonathan Pollert'),
+            'Hallo, das ist eine Email!',
+            'Das ist der alt Content!')
+        );
     }
 }

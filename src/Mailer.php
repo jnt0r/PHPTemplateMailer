@@ -39,7 +39,7 @@ class Mailer
     {
         $config = $this->getConfiguration($config_file);
         $this->mail = new PHPMailer(true);
-        $loader = new FilesystemLoader($config->get('templates_dir'));
+        $loader = new FilesystemLoader(dirname($config_file) . DIRECTORY_SEPARATOR . $config->get('templates_dir'));
         $this->twig = new Environment($loader);
 
         $this->mail->SMTPDebug = 2;
