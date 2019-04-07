@@ -21,6 +21,9 @@ use Twig\Loader\FilesystemLoader;
  */
 class Mailer
 {
+    const SMTP_DEBUG_DEFAULT = 0;
+    const SMTP_SECURE_DEFAULT = '';
+    const PHPMAILER_EXCEPTIONS_DEFAULT = false;
     /**
      * @var PHPMailer
      */
@@ -38,14 +41,14 @@ class Mailer
     public function __construct(string $config_file)
     {
         $config = $this->getConfiguration($config_file);
-        $this->mail = new PHPMailer($config->get('debug'));
+        $this->mail = new PHPMailer($config->get('debug') ?? self::PHPMAILER_EXCEPTIONS_DEFAULT);
         $loader = new FilesystemLoader(dirname(realpath($config_file)) . DIRECTORY_SEPARATOR . $config->get('templates_dir'));
         $this->twig = new Environment($loader);
 
-        $this->mail->SMTPDebug = $config->get('smtp_debug');
+        $this->mail->SMTPDebug = $config->get('smtp_debug') ?? self::SMTP_DEBUG_DEFAULT;
         $this->mail->isSMTP();
         $this->mail->SMTPAuth = true;
-        $this->mail->SMTPSecure = $config->get('smtp_secure');
+        $this->mail->SMTPSecure = $config->get('smtp_secure') ?? self::SMTP_SECURE_DEFAULT;
 
         $this->mail->Host = $config->get('smtp_host');
         $this->mail->Port = $config->get('smtp_port');
