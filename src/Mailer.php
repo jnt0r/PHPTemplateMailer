@@ -38,7 +38,7 @@ class Mailer
     public function __construct(string $config_file)
     {
         $config = $this->getConfiguration($config_file);
-        $this->mail = new PHPMailer(true);
+        $this->mail = new PHPMailer($config->get('debug'));
         $loader = new FilesystemLoader(dirname(realpath($config_file)) . DIRECTORY_SEPARATOR . $config->get('templates_dir'));
         $this->twig = new Environment($loader);
 
