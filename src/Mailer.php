@@ -73,10 +73,10 @@ class Mailer
 
         $this->mail->addAddress($mail->getRecipient()->getEmail(), $mail->getRecipient()->getName());
 
-        print $this->twig->render($mail->getTemplate(), $params);
+        $this->mail->Body = $this->twig->render($mail->getTemplate(), $params);
         $this->mail->AltBody = $this->twig->render($mail->getAltTemplate(), $params);
 
-        //$this->mail->send();
+        $this->mail->send();
     }
 
     /**
