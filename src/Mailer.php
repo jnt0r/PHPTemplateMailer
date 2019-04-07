@@ -46,6 +46,7 @@ class Mailer
         $this->twig = new Environment($loader);
 
         $this->mail->SMTPDebug = $config->get('smtp_debug') ?? self::SMTP_DEBUG_DEFAULT;
+        $this->mail->XMailer = 'PHPTemplateMailer v0.01';
         $this->mail->isSMTP();
         $this->mail->SMTPAuth = true;
         $this->mail->SMTPSecure = $config->get('smtp_secure') ?? self::SMTP_SECURE_DEFAULT;
