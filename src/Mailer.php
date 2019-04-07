@@ -40,7 +40,6 @@ class Mailer
         $config = $this->getConfiguration($config_file);
         $this->mail = new PHPMailer(true);
         $loader = new FilesystemLoader(dirname(realpath($config_file)) . DIRECTORY_SEPARATOR . $config->get('templates_dir'));
-        print dirname(realpath($config_file)) . DIRECTORY_SEPARATOR . $config->get('templates_dir');
         $this->twig = new Environment($loader);
 
         $this->mail->SMTPDebug = 2;
@@ -74,10 +73,10 @@ class Mailer
 
         $this->mail->addAddress($mail->getRecipient()->getEmail(), $mail->getRecipient()->getName());
 
-        $this->mail->Body = $this->twig->render($mail->getTemplate(), $params);
+        print $this->twig->render($mail->getTemplate(), $params);
         $this->mail->AltBody = $this->twig->render($mail->getAltTemplate(), $params);
 
-        $this->mail->send();
+        //$this->mail->send();
     }
 
     /**
