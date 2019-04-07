@@ -52,6 +52,8 @@ class Mailer
 
         $this->mail->Username = $config->get('smtp_user');
         $this->mail->Password = $config->get('smtp_password');
+
+        $this->mail->Encoding = PHPMailer::CHARSET_UTF8;
     }
 
     /**
