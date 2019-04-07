@@ -76,9 +76,7 @@ class Mailer
         $this->mail->Body = $this->twig->render($mail->getTemplate(), $params);
         $this->mail->AltBody = $this->twig->render($mail->getAltTemplate(), $params);
 
-
-        print_r($this->mail);
-        //$this->mail->send();
+        $this->mail->send();
     }
 
     /**
