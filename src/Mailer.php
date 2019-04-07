@@ -42,7 +42,7 @@ class Mailer
         $loader = new FilesystemLoader(dirname(realpath($config_file)) . DIRECTORY_SEPARATOR . $config->get('templates_dir'));
         $this->twig = new Environment($loader);
 
-        $this->mail->SMTPDebug = 2;
+        $this->mail->SMTPDebug = $config->get('smtp_debug');
         $this->mail->isSMTP();
         $this->mail->SMTPAuth = true;
         $this->mail->SMTPSecure = $config->get('smtp_secure');
