@@ -67,16 +67,18 @@ class Mailer
      */
     public function send(Mail $mail, array $params = [])
     {
-        $this->mail->isHTML($mail->isHTML);
-        $this->mail->Subject = $mail->getSubject();
-        $this->mail->setFrom($mail->getSender()->getEmail(), $mail->getSender()->getName());
+        $mailer = $this->mail;
 
-        $this->mail->addAddress($mail->getRecipient()->getEmail(), $mail->getRecipient()->getName());
+        $mailer->isHTML($mail->isHTML);
+        $mailer->Subject = $mail->getSubject();
+        $mailer->setFrom($mail->getSender()->getEmail(), $mail->getSender()->getName());
 
-        $this->mail->Body = $this->twig->render($mail->getTemplate(), $params);
-        $this->mail->AltBody = $this->twig->render($mail->getAltTemplate(), $params);
+        $mailer->addAddress($mail->getRecipient()->getEmail(), $mail->getRecipient()->getName());
 
-        $this->mail->send();
+        $mailer->Body = $this->twig->render($mail->getTemplate(), $params);
+        $mailer->AltBody = $this->twig->render($mail->getAltTemplate(), $params);
+
+        $mailer->send();
     }
 
     /**
